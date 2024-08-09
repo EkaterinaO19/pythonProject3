@@ -1,0 +1,2 @@
+200
+{'sold': 6, 'notify me': 1, 'In stock': 1, '<status>': 5, 'string': 682, 'pending': 3, 'available': 141, 'not available': 1, 'active': 9, 'out of stock': 1}
