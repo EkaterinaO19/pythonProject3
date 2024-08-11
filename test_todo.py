@@ -148,102 +148,102 @@ from playwright.sync_api import Playwright, sync_playwright
 #
 
 from playwright.sync_api import Page
-from playwright.sync_api import expect
-
-
-
-def test_add_todo(page):
-    page.goto("https://demo.playwright.dev/todomvc/#/", wait_until='domcontentloaded')
-    page.locator(".new-todo").click()
-    # x-path:
-    # page.locator("*//[@class='new-todo']").click()
-    page.get_by_placeholder("What needs to be done?").fill("wash dishes")
-    page.get_by_placeholder("What needs to be done?").press("Enter")
-    page.get_by_label("Toggle Todo").check()
-    page.get_by_label("Delete").click()
-
-
-def test_input_form(page):
-    page.goto("https://zimaev.github.io/text_input/")
-    page.locator("input[placeholder='email']").fill("lalal@gmail.com")
-    page.get_by_title("username").fill("Ivan")
-    page.get_by_placeholder("password").fill("123")
-    page.get_by_role("checkbox").click()
-    page.get_by_role("button").click()
-
-
-def test_to_similar_buttons(page):
-    page.goto("https://zimaev.github.io/locatorand/")
-    selector = page.get_by_role("button", name="Sing up").and_(page.get_by_title("Sing up today"))
-    selector.click()
-
-
-def test_locators_chain(page):
-    page.goto("https://zimaev.github.io/navbar/#")
-    nav_bar = page.locator("#navbarNavDropdown >> li:has-text('Company')")
-    nav_bar.click()
-
-
-def test_filter_method(page):
-    page.goto("https://zimaev.github.io/navbar/#")
-    page.locator("li").filter(has_text='Company').click()
-#   page.locator('li').filter(has=page.locator('.dropdown-toggle')).click()
-
-
-# отжать вс ЧБ
-def test_for_cycle(page):
-    page.goto("https://zimaev.github.io/checks-radios/")
-    checkbox = page.locator("input")
-    for i in range(checkbox.count()):
-        checkbox.nth(i).click()
-
-
-# Начиная с версии playwright 1.29 появился специализированный метод locator.all() для перебора всех совпадающих элементов. Если локатор находит несколько  элементов,
-# метод locator.all() возвращает массив локаторов указывающих на соответствующие элементы.
-def test_locator_all(page):
-    page.goto("https://zimaev.github.io/checks-radios/")
-    checkboxes = page.locator("input")
-    a = []
-    for checkbox in checkboxes.all():
-        checkbox.check()
-        a.append(checkbox)
-    print(a)
-
-
-def test_select(page):
-    page.goto('https://zimaev.github.io/select/')
-    page.select_option("#floatingSelect", value="3")
-    # По умолчанию используется поиск по value. Вы можете использовать синтаксис, без явного указания стратегии поиска
-    # page.select_option('#floatingSelect', "3")
-    page.select_option("#floatingSelect", index=1)
-    page.select_option("#floatingSelect", label="Нашел и завел bug")
-
-
-def test_drag_and_drop(page):
-    page.goto('https://zimaev.github.io/draganddrop/')
-    page.drag_and_drop("#drag", "#drop")
-
-
-def test_drag_drop(page):
-    page.goto("https://www.globalsqa.com/demo-site/draganddrop/", wait_until='domcontentloaded')
-    source = page.locator("img[alt='The chalet at the Green mountain lake']")
-    page.drag_and_drop(source, "#trash")
-
-
-def test_dialogs(page):
-    page.goto("https://zimaev.github.io/dialog/")
-    # page.on -  прослушивает события которые, происходит в приложении.
-    # 'dialog'  -  указывает на тип события которое нужно обработать
-    # lambda dialog: dialog.accept() - анонимная функция обрабатывающая событие.
-    page.on("dialog", lambda dialog: dialog.accept())
-    page.get_by_text("Диалог Confirmation").click()
-
-
-def test_todo(page):
-    page.goto('https://demo.playwright.dev/todomvc/#/')
-    expect(page).to_have_url("https://demo.playwright.dev/todomvc/#/")
-
-
+# from playwright.sync_api import expect
+#
+#
+#
+# def test_add_todo(page):
+#     page.goto("https://demo.playwright.dev/todomvc/#/", wait_until='domcontentloaded')
+#     page.locator(".new-todo").click()
+#     # x-path:
+#     # page.locator("*//[@class='new-todo']").click()
+#     page.get_by_placeholder("What needs to be done?").fill("wash dishes")
+#     page.get_by_placeholder("What needs to be done?").press("Enter")
+#     page.get_by_label("Toggle Todo").check()
+#     page.get_by_label("Delete").click()
+#
+#
+# def test_input_form(page):
+#     page.goto("https://zimaev.github.io/text_input/")
+#     page.locator("input[placeholder='email']").fill("lalal@gmail.com")
+#     page.get_by_title("username").fill("Ivan")
+#     page.get_by_placeholder("password").fill("123")
+#     page.get_by_role("checkbox").click()
+#     page.get_by_role("button").click()
+#
+#
+# def test_to_similar_buttons(page):
+#     page.goto("https://zimaev.github.io/locatorand/")
+#     selector = page.get_by_role("button", name="Sing up").and_(page.get_by_title("Sing up today"))
+#     selector.click()
+#
+#
+# def test_locators_chain(page):
+#     page.goto("https://zimaev.github.io/navbar/#")
+#     nav_bar = page.locator("#navbarNavDropdown >> li:has-text('Company')")
+#     nav_bar.click()
+#
+#
+# def test_filter_method(page):
+#     page.goto("https://zimaev.github.io/navbar/#")
+#     page.locator("li").filter(has_text='Company').click()
+# #   page.locator('li').filter(has=page.locator('.dropdown-toggle')).click()
+#
+#
+# # отжать вс ЧБ
+# def test_for_cycle(page):
+#     page.goto("https://zimaev.github.io/checks-radios/")
+#     checkbox = page.locator("input")
+#     for i in range(checkbox.count()):
+#         checkbox.nth(i).click()
+#
+#
+# # Начиная с версии playwright 1.29 появился специализированный метод locator.all() для перебора всех совпадающих элементов. Если локатор находит несколько  элементов,
+# # метод locator.all() возвращает массив локаторов указывающих на соответствующие элементы.
+# def test_locator_all(page):
+#     page.goto("https://zimaev.github.io/checks-radios/")
+#     checkboxes = page.locator("input")
+#     a = []
+#     for checkbox in checkboxes.all():
+#         checkbox.check()
+#         a.append(checkbox)
+#     print(a)
+#
+#
+# def test_select(page):
+#     page.goto('https://zimaev.github.io/select/')
+#     page.select_option("#floatingSelect", value="3")
+#     # По умолчанию используется поиск по value. Вы можете использовать синтаксис, без явного указания стратегии поиска
+#     # page.select_option('#floatingSelect', "3")
+#     page.select_option("#floatingSelect", index=1)
+#     page.select_option("#floatingSelect", label="Нашел и завел bug")
+#
+#
+# def test_drag_and_drop(page):
+#     page.goto('https://zimaev.github.io/draganddrop/')
+#     page.drag_and_drop("#drag", "#drop")
+#
+#
+# def test_drag_drop(page):
+#     page.goto("https://www.globalsqa.com/demo-site/draganddrop/", wait_until='domcontentloaded')
+#     source = page.locator("img[alt='The chalet at the Green mountain lake']")
+#     page.drag_and_drop(source, "#trash")
+#
+#
+# def test_dialogs(page):
+#     page.goto("https://zimaev.github.io/dialog/")
+#     # page.on -  прослушивает события которые, происходит в приложении.
+#     # 'dialog'  -  указывает на тип события которое нужно обработать
+#     # lambda dialog: dialog.accept() - анонимная функция обрабатывающая событие.
+#     page.on("dialog", lambda dialog: dialog.accept())
+#     page.get_by_text("Диалог Confirmation").click()
+#
+#
+# def test_todo(page):
+#     page.goto('https://demo.playwright.dev/todomvc/#/')
+#     expect(page).to_have_url("https://demo.playwright.dev/todomvc/#/")
+#
+#
 
 
 
