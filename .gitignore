@@ -1,0 +1,22 @@
+venv/
+env/
+.venv/
+__pycache__/
+*.log
+*.tmp
+*.swp
+# PyCharm
+.idea/
+
+# Visual Studio Code
+.vscode/
+# Docker
+*.dockerignore
+*.env
+
+# Allure
+reports/
+allure-results/
+
+# pytest
+.cache/
