@@ -1,11 +1,8 @@
-FROM mcr.microsoft.com/playwright:v1.28.0-focal
+FROM python:3.12
 
-RUN apt-get update && apt-get install -y \
-    allure-commandline
-
-COPY ui/requirements.txt .
+COPY api_tests/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ui/ .
+COPY api_tests/ ./
 
-CMD ["pytest", "--alluredir=allure-results"]
+CMD ["pytest"]

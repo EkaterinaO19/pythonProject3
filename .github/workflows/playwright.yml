@@ -12,37 +12,108 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Build Docker image for UI tests
-        run: docker build -f ui/Dockerfile -t playwright-tests .
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
-      - name: Run UI tests in Docker container
-        run: docker run playwright-tests
+      - name: Install dependencies
+        run: |
+          cd ui
+          pip install -r requirements.txt
+
+      - name: Run UI tests
+        run: |
+          cd ui
+          pytest --alluredir=allure-results
 
       - name: Upload Allure report for UI tests
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: allure_report_ui
-          path: reports/
+          path: ui/allure-results/
 
   # Job для API тестов
   api_tests:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Build Docker image for API tests
-        run: docker build -f api/Dockerfile -t api-tests .
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
-      - name: Run API tests in Docker container
-        run: docker run api-tests
+      - name: Install dependencies
+        run: |
+          cd api_tests
+          pip install -r requirements.txt
+
+      - name: Run API tests
+        run: |
+          cd api_tests
+          pytest --alluredir=allure-results
 
       - name: Upload API test results
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: api_test_results
-          path: api/tests/results/
+          path: api_tests/allure-results/
+
+
+
+#name: Run Tests
+#
+#on:
+#  push:
+#    branches: [ main, master ]
+#  pull_request:
+#    branches: [ main, master ]
+#
+#jobs:
+#  # Job для UI тестов
+#  ui_tests:
+#    timeout-minutes: 60
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Build Docker image for UI tests
+#        run: docker build -f ui/Dockerfile -t playwright-tests .
+#
+#      - name: Run UI tests in Docker container
+#        run: docker run playwright-tests
+#
+#      - name: Upload Allure report for UI tests
+#        uses: actions/upload-artifact@v4
+#        if: ${{ !cancelled() }}
+#        with:
+#          name: allure_report_ui
+#          path: reports/
+#
+#  # Job для API тестов
+#  api_tests:
+#    timeout-minutes: 30
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Build Docker image for API tests
+#        run: docker build -f api/Dockerfile -t api-tests .
+#
+#      - name: Run API tests in Docker container
+#        run: docker run api-tests
+#
+#      - name: Upload API test results
+#        uses: actions/upload-artifact@v4
+#        if: ${{ !cancelled() }}
+#        with:
+#          name: api_test_results
+#          path: api/tests/results/

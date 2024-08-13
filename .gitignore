@@ -15,8 +15,8 @@ __pycache__/
 *.env
 
 # Allure
-reports/
-allure-results/
+#reports/
+#allure-results/
 
 # pytest
 .cache/
