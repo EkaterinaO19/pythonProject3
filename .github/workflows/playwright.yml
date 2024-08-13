@@ -7,25 +7,18 @@ on:
     branches: [ main, master ]
 
 jobs:
-  # Job для UI тестов
+  # Job for UI tests
   ui_tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          cd ui
           pip install -r requirements.txt
 
-      - name: Run UI tests
+      - name: Run UI Tests
         run: |
           cd ui
           pytest --alluredir=allure-results
@@ -35,27 +28,20 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: allure_report_ui
-          path: ui/allure-results/
+          path: ui/allure-results
 
-  # Job для API тестов
+  # Job for API tests
   api_tests:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          cd api_tests
           pip install -r requirements.txt
 
-      - name: Run API tests
+      - name: Run API Tests
         run: |
           cd api_tests
           pytest --alluredir=allure-results
@@ -65,8 +51,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: api_test_results
-          path: api_tests/allure-results/
-
+          path: api_tests/allure-results
 
 
 #name: Run Tests
