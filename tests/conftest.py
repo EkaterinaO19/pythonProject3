@@ -9,6 +9,7 @@ from pages.store_login_page import StoreLoginPage
 from pages.store_product_page import StoreProductPage
 from playwright.sync_api import Page
 from pages.cart_page import CartPage
+from pages.checkout_step_one_page import CheckoutStepOnePage
 """Фикстуры позволяют инициализировать объекты, которые затем могут быть использованы в тестах. 
 Это улучшает читаемость и уменьшает дублирование кода."""
 
@@ -79,6 +80,12 @@ def store_product_page(page: Page):
 @pytest.fixture
 def navigation_page(page: Page):
     return NavigationPage(page)
+
+
+@pytest.fixture
+def checkout_step_one_page(page: Page):
+    return CheckoutStepOnePage(page)
+
 
 # #
 # # @pytest.fixture(scope="session")
