@@ -19,9 +19,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Ensure browsers are installed
+        run: python -m playwright install --with-deps
+
       - name: Run UI Tests
         run: |
-          pytest ui --alluredir=allure-results
+          pytest ui --alluredir=allure-results 
 
       - name: Upload Allure report for UI tests
         uses: actions/upload-artifact@v4
