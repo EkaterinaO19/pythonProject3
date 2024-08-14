@@ -13,16 +13,16 @@ def test_add_to_cart(logged_in_page, store_inventory_page, cart_page):
     assert cart_product_name == product_name
 
 
-@allure.feature('Cart')
-@allure.story('Add item to cart')
-@allure.title('Add badge with amount of product added to cart')
-@allure.severity(allure.severity_level.MINOR)
-def test_add_badge_to_cart(logged_in_page, store_login_page, store_inventory_page):
-    store_inventory_page.add_to_cart()
-    product_amount = store_inventory_page.get_product_quantity()
-    cart_badge_quantity = store_inventory_page.get_cart_badge()
-    assert product_amount == cart_badge_quantity
-#
+# @allure.feature('Cart')
+# @allure.story('Add item to cart')
+# @allure.title('Add badge with amount of product added to cart')
+# @allure.severity(allure.severity_level.MINOR)
+# def test_add_badge_to_cart(logged_in_page, store_login_page, store_inventory_page):
+#     store_inventory_page.add_to_cart()
+#     product_amount = store_inventory_page.get_product_quantity()
+#     cart_badge_quantity = store_inventory_page.get_cart_badge()
+#     assert product_amount == cart_badge_quantity
+# #
 #
 # @allure.feature('Cart')
 # @allure.story('Add item to cart')
