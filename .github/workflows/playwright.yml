@@ -46,7 +46,6 @@ jobs:
 
       - name: Run API Tests
         run: |
-          cd api_tests
           pytest --alluredir=allure-results
 
       - name: Upload API test results
