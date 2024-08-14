@@ -1,5 +1,6 @@
 import pytest
-from api_tests.api.user_api import UserAPI
+
+from api_reqres.api.user_api import UserAPI
 
 
 def test_register_user_success():

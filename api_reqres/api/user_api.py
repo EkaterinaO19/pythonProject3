@@ -1,5 +1,5 @@
 import requests
-from api_tests.models.register import RegisterRequest, RegisterResponse
+from api_reqres.models.register import RegisterRequest, RegisterResponse
 
 REGISTER_URL = "https://reqres.in/api/register"
 

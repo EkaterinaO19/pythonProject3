@@ -1,6 +1,6 @@
 import requests
-from api_tests.api.endpoints import REGISTER
-from api_tests.models.register import RegisterRequest, RegisterResponse
+from api_reqres.api.endpoints import REGISTER
+from api_reqres.models.register import RegisterRequest, RegisterResponse
 
 
 class APIClient:
