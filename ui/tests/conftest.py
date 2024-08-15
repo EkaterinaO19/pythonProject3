@@ -50,7 +50,7 @@ def take_screenshot_on_failure(request, logged_in_page: Page):
 #     login_page.login('standard_user', 'secret_sauce')
 #     return page
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def browser_context():
     with sync_playwright() as p:
         # browser = p.chromium.launch(headless=True)
@@ -61,12 +61,12 @@ def browser_context():
         browser.close()
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def page(browser_context):
     return browser_context.new_page()
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def logged_in_page(browser_context: BrowserContext, page: Page):
     expires_in_one_hour = int(time.time()) + 3600
 
