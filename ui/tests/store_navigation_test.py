@@ -1,4 +1,3 @@
-import pytest
 import allure
 
 
@@ -7,7 +6,15 @@ import allure
 @allure.title('Navigation through burger menu')
 @allure.severity(allure.severity_level.CRITICAL)
 def navigation_burger_check(logged_in_page, navigation_page):
-    navigation_page.navigate_and_check_url("about")
-    navigation_page.navigate_and_check_url("all_items")
-    navigation_page.navigate_and_check_url("logout")
-    navigation_page.navigate_and_check_url("reset")
+    with allure.step("Navigate to 'about' page and check URL"):
+        navigation_page.navigate_and_check_url("about")
+
+    with allure.step("Navigate to 'all_items' page and check URL"):
+        navigation_page.navigate_and_check_url("all_items")
+
+    with allure.step("Navigate to 'logout' page and check URL"):
+        navigation_page.navigate_and_check_url("logout")
+
+    with allure.step("Navigate to 'reset' page and check URL"):
+        navigation_page.navigate_and_check_url("reset")
+
