@@ -53,8 +53,8 @@ def take_screenshot_on_failure(request, logged_in_page: Page):
 @pytest.fixture(scope="session")
 def browser_context():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
-        # browser = p.chromium.launch()
+        # browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch()
         context = browser.new_context()
         yield context
         context.close()
